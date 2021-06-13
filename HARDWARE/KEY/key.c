@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-18 21:09:55
- * @LastEditTime: 2021-05-24 22:30:11
+ * @LastEditTime: 2021-06-13 18:23:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \UCOSIII_Template\HARDWARE\KEY\key.c
@@ -49,6 +49,7 @@ void KEY_Init(void) //IO初始化
 //3，KEY2按下 
 //4，KEY3按下 WK_UP
 //注意此函数有响应优先级,KEY0>KEY1>KEY2>KEY3!!
+/**/
 u8 KEY_Scan(u8 mode)
 {	 
 	static u8 key_up=1;//按键按松开标志
