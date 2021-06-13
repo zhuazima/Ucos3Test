@@ -8,15 +8,9 @@
 ..\obj\timer.o: ..\USER\stm32f10x_conf.h
 ..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_adc.h
 ..\obj\timer.o: ..\USER\stm32f10x.h
-..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_bkp.h
 ..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_dac.h
-..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_exti.h
-..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_fsmc.h
 ..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
-..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_pwr.h
 ..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rcc.h
-..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rtc.h
-..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_spi.h
 ..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
 ..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\timer.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h

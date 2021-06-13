@@ -5,6 +5,7 @@
 #include "usart.h"
 #include "adc.h"
 #include "includes.h"
+#include "timer.h"
 /************************************************
  ALIENTEK战舰STM32开发板UCOS实验
  例4-1 UCOSIII UCOSIII移植
@@ -91,16 +92,16 @@ void float_task(void *p_arg);
 /********************************************************************************
 							ADC 任务的相关宏定义
 ********************************************************************************/
-// //任务优先级
-// #define ADC_TASK_PRIO		7
-// //任务堆栈大小
-// #define ADC_STK_SIZE		128
-// //任务控制块
-// OS_TCB	AdcTaskTCB;
-// //任务堆栈
-// __align(8) CPU_STK	ADC_TASK_STK[ADC_STK_SIZE];
-// //任务函数
-// void adc_task(void *p_arg);
+//任务优先级
+#define ADC_TASK_PRIO		7
+//任务堆栈大小
+#define ADC_STK_SIZE		128
+//任务控制块
+OS_TCB	AdcTaskTCB;
+//任务堆栈
+__align(8) CPU_STK	ADC_TASK_STK[ADC_STK_SIZE];
+//任务函数
+void adc_task(void *p_arg);
 
 
 /********************************************************************************
@@ -117,9 +118,27 @@ __align(8) CPU_STK	KEY_TASK_STK[KEY_STK_SIZE];
 //任务函数
 void key_task(void *p_arg);
 
+/********************************************************************************
+							PWM 任务的相关宏定义
+********************************************************************************/
+//任务优先级
+#define PWM_TASK_PRIO		9
+//任务堆栈大小
+#define PWM_STK_SIZE		128
+//任务控制块
+OS_TCB	PwmTaskTCB;
+//任务堆栈
+__align(8) CPU_STK	PWM_TASK_STK[PWM_STK_SIZE];
+//任务函数
+void pwm_task(void *p_arg);
 
 
-/**/
+/*********************************************************************************/
+
+/*********************************************************************************/
+
+
+
 
 int main(void)
 {
@@ -128,10 +147,12 @@ int main(void)
 	
 	delay_init();       //延时初始化
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断优先级分组
-	uart_init(115200);    //串口波特率设置
+	uart_init(9600);    //串口波特率设置
 	LED_Init();         //LED初始化
 	KEY_Init();			//key init
 	Adc_Init();
+	TIM3_PWM_Init(899,0); // 不分频 ,PWM 频率 =72000/900=80KHz
+
 
 	
 	OSInit(&err);		//初始化UCOSIII
@@ -227,22 +248,20 @@ void start_task(void *p_arg)
                  (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
                  (OS_ERR 	* )&err);								 
 
-	//创建ADC测试任务
-	// OSTaskCreate((OS_TCB 	* )&AdcTaskTCB,		
-	// 			 (CPU_CHAR	* )"adc test task", 		
-    //              (OS_TASK_PTR )adc_task, 			
-    //              (void		* )0,					
-    //              (OS_PRIO	  )ADC_TASK_PRIO,     	
-    //              (CPU_STK   * )&ADC_TASK_STK[0],	
-    //              (CPU_STK_SIZE)ADC_STK_SIZE/10,	
-    //              (CPU_STK_SIZE)ADC_STK_SIZE,		
-    //              (OS_MSG_QTY  )0,					
-    //              (OS_TICK	  )0,					
-    //              (void   	* )0,				
-    //              (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
-    //              (OS_ERR 	* )&err);	
-
-
+	// 创建ADC测试任务
+	OSTaskCreate((OS_TCB 	* )&AdcTaskTCB,		
+				 (CPU_CHAR	* )"adc test task", 		
+                 (OS_TASK_PTR )adc_task, 			
+                 (void		* )0,					
+                 (OS_PRIO	  )ADC_TASK_PRIO,     	
+                 (CPU_STK   * )&ADC_TASK_STK[0],	
+                 (CPU_STK_SIZE)ADC_STK_SIZE/10,	
+                 (CPU_STK_SIZE)ADC_STK_SIZE,		
+                 (OS_MSG_QTY  )0,					
+                 (OS_TICK	  )0,					
+                 (void   	* )0,				
+                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
+                 (OS_ERR 	* )&err);	
 
 	//创建KEY测试任务
 	OSTaskCreate((OS_TCB 	* )&KeyTaskTCB,		
@@ -258,6 +277,22 @@ void start_task(void *p_arg)
                  (void   	* )0,				
                  (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
                  (OS_ERR 	* )&err);	
+
+	//创建PWM测试任务
+	OSTaskCreate((OS_TCB 	* )&PwmTaskTCB,		
+				 (CPU_CHAR	* )"pwm test task", 		
+                 (OS_TASK_PTR )pwm_task, 			
+                 (void		* )0,					
+                 (OS_PRIO	  )PWM_TASK_PRIO,     	
+                 (CPU_STK   * )&PWM_TASK_STK[0],	
+                 (CPU_STK_SIZE)PWM_STK_SIZE/10,	
+                 (CPU_STK_SIZE)PWM_STK_SIZE,		
+                 (OS_MSG_QTY  )0,					
+                 (OS_TICK	  )0,					
+                 (void   	* )0,				
+                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
+                 (OS_ERR 	* )&err);	
+
 
 
 
@@ -320,21 +355,21 @@ void float_task(void *p_arg)
 /********************************************************************************
 							ADC 任务
 ********************************************************************************/
-// void adc_task(void *p_arg)
-// {
-// 	OS_ERR err;
-// 	u16 adcx;
+void adc_task(void *p_arg)
+{
+	OS_ERR err;
+	u16 adcx;
 
-// 	p_arg = p_arg;
+	p_arg = p_arg;
 
-// 	while(1)
-// 	{
-// 		adcx=Get_Adc_Average(ADC_Channel_1,10);
-// 		printf("测试ADC的值是: %x\r\n",adcx);
+	while(1)
+	{
+		adcx=Get_Adc_Average(ADC_Channel_2,10);
+		printf("测试ADC的值是: %x\r\n",adcx);
 
-// 		OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err); //延时500ms
-// 	}
-// }
+		OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err); //延时500ms
+	}
+}
 
 
 
@@ -347,11 +382,11 @@ void key_task(void *p_arg)
 	u8  key = 0;
 	
 	OS_ERR err;
+	err = err;
 	p_arg = p_arg;
 
-	OS_TaskSuspend((OS_TCB  *)&Led0TaskTCB,&err);
-	OS_TaskSuspend((OS_TCB  *)&Led1TaskTCB,&err);
-	// OS_TaskSuspend((OS_TCB  *)&AdcTaskTCB,&err);
+	// OS_TaskSuspend((OS_TCB  *)&Led0TaskTCB,&err);
+	// OS_TaskSuspend((OS_TCB  *)&Led1TaskTCB,&err);
 
 
 	while(1)
@@ -371,15 +406,45 @@ void key_task(void *p_arg)
 					break;
 			}
 		}else delay_ms(10); 
-
-
 	}	 
-
-	
 }
 
 
 
+/********************************************************************************
+							PWM 任务
+********************************************************************************/
+void pwm_task(void *p_arg)
+{
+
+
+ 	u16 led0pwmval=0;
+	u8 dir=1;	
+
+	OS_ERR err;
+	err = err;
+	p_arg = p_arg;
+
+
+	while(1)
+	{
+		delay_ms(10);	
+		 
+		if(dir)
+		{
+			led0pwmval++;
+		}
+		else 
+		{
+			led0pwmval--;
+		}
+
+ 		if(led0pwmval > 300)	dir=0;
+		if(led0pwmval == 0)		dir=1;		
+
+		TIM_SetCompare2(TIM3,led0pwmval);		
+	}	 
+}
 
 
 

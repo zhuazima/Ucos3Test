@@ -22,5 +22,6 @@
 ..\obj\bsp.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_dac.h
 ..\obj\bsp.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
 ..\obj\bsp.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\bsp.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
 ..\obj\bsp.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\bsp.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h

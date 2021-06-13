@@ -11,5 +11,6 @@
 ..\obj\led.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_dac.h
 ..\obj\led.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
 ..\obj\led.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\led.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
 ..\obj\led.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\led.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h

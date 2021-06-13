@@ -10,5 +10,6 @@
 ..\obj\misc.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_dac.h
 ..\obj\misc.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
 ..\obj\misc.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\misc.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
 ..\obj\misc.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\misc.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h

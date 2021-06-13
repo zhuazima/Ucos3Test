@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-29 22:35:45
- * @LastEditTime: 2021-05-29 11:14:30
+ * @LastEditTime: 2021-06-13 12:34:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \UCOSIII_Template\USER\stm32f10x_conf.h
@@ -52,7 +52,7 @@
 // #include "stm32f10x_rtc.h"
 //#include "stm32f10x_sdio.h"
 // #include "stm32f10x_spi.h"
-// #include "stm32f10x_tim.h"
+#include "stm32f10x_tim.h"
 #include "stm32f10x_usart.h"
 //#include "stm32f10x_wwdg.h"
 #include "misc.h" /* High level functions for NVIC and SysTick (add-on to CMSIS functions) */

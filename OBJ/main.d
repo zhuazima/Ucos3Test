@@ -11,6 +11,7 @@
 ..\obj\main.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_dac.h
 ..\obj\main.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
 ..\obj\main.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\main.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
 ..\obj\main.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\main.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h
 ..\obj\main.o: ..\HARDWARE\KEY\key.h
@@ -41,3 +42,4 @@
 ..\obj\main.o: ..\UCOSIII\uC-LIB\lib_math.h
 ..\obj\main.o: ..\UCOSIII\uCOS_CONFIG\app_cfg.h
 ..\obj\main.o: ..\UCOSIII\UCOS_BSP\bsp.h
+..\obj\main.o: ..\HARDWARE\TIMER\timer.h

@@ -11,6 +11,7 @@
 ..\obj\delay.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_dac.h
 ..\obj\delay.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
 ..\obj\delay.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\delay.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
 ..\obj\delay.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\delay.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h
 ..\obj\delay.o: ..\UCOSIII\uCOS_CONFIG\includes.h
