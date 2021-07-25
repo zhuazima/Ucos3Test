@@ -147,11 +147,11 @@ int main(void)
 	
 	delay_init();       //延时初始化
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断优先级分组
-	uart_init(9600);    //串口波特率设置
+	uart_init(115200);    //串口波特率设置
 	LED_Init();         //LED初始化
 	KEY_Init();			//key init
 	Adc_Init();
-	TIM3_PWM_Init(899,0); // 不分频 ,PWM 频率 =72000/900=80KHz
+	TIM3_PWM_Init(2200,0); // 不分频 ,PWM 频率 =72000/900=80KHz
 
 
 	
@@ -204,19 +204,19 @@ void start_task(void *p_arg)
 	OS_CRITICAL_ENTER();	//进入临界区
 
 	//创建LED0任务
-	OSTaskCreate((OS_TCB 	* )&Led0TaskTCB,		
-				 (CPU_CHAR	* )"led0 task", 		
-                 (OS_TASK_PTR )led0_task, 			
-                 (void		* )0,					
-                 (OS_PRIO	  )LED0_TASK_PRIO,     
-                 (CPU_STK   * )&LED0_TASK_STK[0],	
-                 (CPU_STK_SIZE)LED0_STK_SIZE/10,	
-                 (CPU_STK_SIZE)LED0_STK_SIZE,		
-                 (OS_MSG_QTY  )0,					
-                 (OS_TICK	  )0,					
-                 (void   	* )0,					
-                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR,
-                 (OS_ERR 	* )&err);				
+	// OSTaskCreate((OS_TCB 	* )&Led0TaskTCB,		
+	// 			 (CPU_CHAR	* )"led0 task", 		
+    //              (OS_TASK_PTR )led0_task, 			
+    //              (void		* )0,					
+    //              (OS_PRIO	  )LED0_TASK_PRIO,     
+    //              (CPU_STK   * )&LED0_TASK_STK[0],	
+    //              (CPU_STK_SIZE)LED0_STK_SIZE/10,	
+    //              (CPU_STK_SIZE)LED0_STK_SIZE,		
+    //              (OS_MSG_QTY  )0,					
+    //              (OS_TICK	  )0,					
+    //              (void   	* )0,					
+    //              (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR,
+    //              (OS_ERR 	* )&err);				
 				 
 	//创建LED1任务
 	OSTaskCreate((OS_TCB 	* )&Led1TaskTCB,		
@@ -432,17 +432,17 @@ void pwm_task(void *p_arg)
 		 
 		if(dir)
 		{
-			led0pwmval++;
+			led0pwmval += 40;
 		}
 		else 
 		{
-			led0pwmval--;
+			led0pwmval -= 40;
 		}
 
- 		if(led0pwmval > 300)	dir=0;
+ 		if(led0pwmval > 2100)	dir=0;
 		if(led0pwmval == 0)		dir=1;		
 
-		TIM_SetCompare2(TIM3,led0pwmval);		
+		TIM_SetCompare3(TIM3,led0pwmval);
 	}	 
 }
 

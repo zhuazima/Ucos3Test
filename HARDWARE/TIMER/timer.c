@@ -48,9 +48,9 @@ void TIM3_Int_Init(u16 arr,u16 psc)
 
 void TIM3_IRQHandler(void)   //TIM3中断
 {
-	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) //检查指定的TIM中断发生与否:TIM 中断源 
+	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) //检查指定的TIM中断发生与否:TIM 中断源
 		{
-		TIM_ClearITPendingBit(TIM3, TIM_IT_Update  );  //清除TIMx的中断待处理位:TIM 中断源 
+		TIM_ClearITPendingBit(TIM3, TIM_IT_Update  );  //清除TIMx的中断待处理位:TIM 中断源
 		LED1=!LED1;
 		}
 }
@@ -69,16 +69,34 @@ void TIM3_PWM_Init(u16 arr,u16 psc)
 	TIM_OCInitTypeDef  TIM_OCInitStructure;
 	
 
+ 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);  //使能GPIO外设和AFIO复用功能模块时钟使能
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
- 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB  | RCC_APB2Periph_AFIO, ENABLE);  //使能GPIO外设和AFIO复用功能模块时钟使能
-	
+
+
+#if 0
+
+	//TIM3CH2 映射倒 PB5的设置
 	GPIO_PinRemapConfig(GPIO_PartialRemap_TIM3, ENABLE); //Timer3部分重映射  TIM3_CH2->PB5                                                                       	 //用于TIM3的CH2输出的PWM通过该LED显示
  
-   //设置该引脚为复用输出功能,输出TIM3 CH2的PWM脉冲波形
+	//设置该引脚为复用输出功能,输出TIM3 CH2的PWM脉冲波形
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5; //TIM_CH2
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;  //复用推挽输出
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+#endif
+
+#if 1
+
+		//使用PB0 的端口复用这里CH3,在下面配置的时候要注意配置到通道 3
+		//同时再设置占空比的时候 ： TIM_SetCompare3(TIM3,led0pwmval); 也要做相应的修改
+
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0; //TIM3_CH3
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;  //复用推挽输出
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+		GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+#endif 
 
 	TIM_TimeBaseStructure.TIM_Period = arr; //设置在下一个更新事件装入活动的自动重装载寄存器周期的值
 	TIM_TimeBaseStructure.TIM_Prescaler =psc; //设置用来作为TIMx时钟频率除数的预分频值  不分频
@@ -91,12 +109,13 @@ void TIM3_PWM_Init(u16 arr,u16 psc)
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //比较输出使能
 	TIM_OCInitStructure.TIM_Pulse = 0; //设置待装入捕获比较寄存器的脉冲值
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //输出极性:TIM输出比较极性高
-	TIM_OC2Init(TIM3, &TIM_OCInitStructure);  //根据TIM_OCInitStruct中指定的参数初始化外设TIMx
-	TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable);  //使能TIMx在CCR2上的预装载寄存器
-	
+	//!!!!!!!!!!!!!!!!!!!!!!重要，下面函数的TIM_OC2Init的2是TIM3的通道选择，谢谢！！！！！！///////////////////
+	TIM_OC3Init(TIM3, &TIM_OCInitStructure);  //根据TIM_OCInitStruct中指定的参数初始化外设TIMx
+	TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable);  //使能TIMx在CCR2上的预装载寄存器
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	TIM_ARRPreloadConfig(TIM3, ENABLE); //使能TIMx在ARR上的预装载寄存器
 	
- 
 	TIM_Cmd(TIM3, ENABLE);  //使能TIMx外设
  
 

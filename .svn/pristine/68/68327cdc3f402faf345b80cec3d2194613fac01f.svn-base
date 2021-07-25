@@ -1,0 +1,31 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "master"]
+	url = https://github.com/zhuazima/UCOSIII_test.git
+	fetch = +refs/heads/*:refs/remotes/master/*
+[remote "zhuzima"]
+	url = https://github.com/zhuazima/UCOSIII_test.git
+	fetch = +refs/heads/*:refs/remotes/zhuzima/*
+[remote "UCOSIII_test"]
+	url = https://github.com/zhuazima/UCOSIII_test.git
+	fetch = +refs/heads/*:refs/remotes/UCOSIII_test/*
+[remote "master1"]
+	url = https://github.com/zhuazima/UCOS3_TEST.git
+	fetch = +refs/heads/*:refs/remotes/master1/*
+[remote "main"]
+	url = https://github.com/zhuazima/test.git
+	fetch = +refs/heads/*:refs/remotes/main/*
+[gui]
+	wmstate = normal
+	geometry = 1061x563+357+81 233 255
+[remote "origin"]
+	url = https://github.com/zhuazima/ucos3_learning.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "origin-"]
+	url = https://github.com/zhuazima/ucos3_learning.git
+	fetch = +refs/heads/*:refs/remotes/origin-/*
