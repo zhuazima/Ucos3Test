@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-29 22:35:45
- * @LastEditTime: 2021-06-13 12:34:19
+ * @LastEditTime: 2021-07-26 09:47:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \UCOSIII_Template\USER\stm32f10x_conf.h
@@ -45,7 +45,7 @@
 //#include "stm32f10x_flash.h"
 // #include "stm32f10x_fsmc.h"
 #include "stm32f10x_gpio.h"
-//#include "stm32f10x_i2c.h"
+#include "stm32f10x_i2c.h"
 //#include "stm32f10x_iwdg.h"
 // #include "stm32f10x_pwr.h"
 #include "stm32f10x_rcc.h"

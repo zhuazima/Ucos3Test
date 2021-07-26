@@ -6,6 +6,11 @@
 #include "adc.h"
 #include "includes.h"
 #include "timer.h"
+#include "i2c.h"
+#include "oled0561.h"
+#include "lm75a.h"
+
+
 /************************************************
  ALIENTEK战舰STM32开发板UCOS实验
  例4-1 UCOSIII UCOSIII移植
@@ -44,11 +49,26 @@ CPU_STK START_TASK_STK[START_STK_SIZE];
 void start_task(void *p_arg);
 
 
+
+/********************************************************************************
+							OLED 任务的相关宏定义
+********************************************************************************/
+//任务优先级
+#define	OLED_TASK_PRIO		5
+//任务堆栈大小	
+#define OLED_STK_SIZE 		128
+//任务控制块
+OS_TCB OledTaskTCB;
+//任务堆栈	
+CPU_STK OLED_TASK_STK[OLED_STK_SIZE];
+void oled_task(void *p_arg);
+
+
 /********************************************************************************
 							LED0 任务的相关宏定义
 ********************************************************************************/
 //任务优先级
-#define LED0_TASK_PRIO		4
+#define LED0_TASK_PRIO		6
 //任务堆栈大小	
 #define LED0_STK_SIZE 		128
 //任务控制块
@@ -152,6 +172,12 @@ int main(void)
 	KEY_Init();			//key init
 	Adc_Init();
 	TIM3_PWM_Init(2200,0); // 不分频 ,PWM 频率 =72000/900=80KHz
+		I2C_Configuration();//I2C初始化
+		OLED0561_Init(); //OLED0516初始化
+		OLED_DISPLAY_LIT(100);//亮度
+
+
+
 
 
 	
@@ -294,11 +320,62 @@ void start_task(void *p_arg)
                  (OS_ERR 	* )&err);	
 
 
+	//创建OLED测试任务
+	OSTaskCreate((OS_TCB 	* )&OledTaskTCB,		
+				 (CPU_CHAR	* )"oled test task", 		
+                 (OS_TASK_PTR )oled_task, 			
+                 (void		* )0,					
+                 (OS_PRIO	  )OLED_TASK_PRIO,     	
+                 (CPU_STK   * )&OLED_TASK_STK[0],	
+                 (CPU_STK_SIZE)OLED_STK_SIZE/10,	
+                 (CPU_STK_SIZE)OLED_STK_SIZE,		
+                 (OS_MSG_QTY  )0,					
+                 (OS_TICK	  )0,					
+                 (void   	* )0,				
+                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
+                 (OS_ERR 	* )&err);	
+
+
 
 
 	OS_TaskSuspend((OS_TCB*)&StartTaskTCB,&err);		//挂起开始任务			 
 	OS_CRITICAL_EXIT();	//退出临界区
 }
+
+/********************************************************************************
+							PWM 任务
+********************************************************************************/
+void oled_task(void *p_arg)
+{
+	u8 buffer[3];
+
+	OLED_DISPLAY_PIC1();//显示图片
+	delay_ms(5000); //延时
+	OLED_DISPLAY_CLEAR();
+	OLED_DISPLAY_8x16_BUFFER(0,"   YoungTalk ");
+	OLED_DISPLAY_8x16_BUFFER(6,"  Temp:");
+
+	OLED_DISPLAY_16x16(2,2*16,0);
+	OLED_DISPLAY_16x16(2,3*16,1);
+	OLED_DISPLAY_16x16(2,4*16,2);
+	OLED_DISPLAY_16x16(2,5*16,3);
+
+	while(1){
+		LM75A_GetTemp(buffer); //温度值
+			
+		if(buffer[0])OLED_DISPLAY_8x16(6,7*8,'-'); //
+		OLED_DISPLAY_8x16(6,8*8,buffer[1]/10+0x30);//
+		OLED_DISPLAY_8x16(6,9*8,buffer[1]%10+0x30);//
+		OLED_DISPLAY_8x16(6,10*8,'.');//
+		OLED_DISPLAY_8x16(6,11*8,buffer[2]/10+0x30);//
+		OLED_DISPLAY_8x16(6,12*8 ,buffer[2]%10+0x30);//
+		OLED_DISPLAY_8x16(6,13*8,'C');//
+
+		delay_ms(200);
+	}
+
+}
+
 
 
 /********************************************************************************

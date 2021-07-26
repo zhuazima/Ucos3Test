@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-29 22:35:44
- * @LastEditTime: 2021-06-22 21:56:58
+ * @LastEditTime: 2021-07-25 10:43:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \例4-1 UCOSIII移植\HARDWARE\LED\led.c
@@ -18,7 +18,7 @@
 //版本：V1.0
 //版权所有，盗版必究。
 //Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved									  
+//All rights reserved
 ////////////////////////////////////////////////////////////////////////////////// 	   
 
 //初始化PB5和PE5为输出口.并使能这两个口的时钟		    
@@ -49,9 +49,9 @@ void LED_Init(void)
 
 
 
-//  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;	    		 //LED1-->PB.1 端口配置, 推挽输出
-//  GPIO_Init(GPIOB, &GPIO_InitStructure);	  				 //推挽输出 ，IO口速度为50MHz
-//  GPIO_SetBits(GPIOB,GPIO_Pin_5); 						 //PB.1 输出高 
+    //  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;	    		 //LED1-->PB.1 端口配置, 推挽输出
+    //  GPIO_Init(GPIOB, &GPIO_InitStructure);	  				 //推挽输出 ，IO口速度为50MHz
+    //  GPIO_SetBits(GPIOB,GPIO_Pin_5); 						 //PB.1 输出高 
 
 
 

@@ -4,6 +4,12 @@
         "key.h": "c",
         "sys.h": "c",
         "stm32f10x_adc.h": "c",
-        "includes.h": "c"
+        "includes.h": "c",
+        "i2c.h": "c",
+        "stm32f10x.h": "c",
+        "oled0561.h": "c",
+        "ascii_8x16.h": "c",
+        "chs_16x16.h": "c",
+        "lm75a.h": "c"
     }
 }
