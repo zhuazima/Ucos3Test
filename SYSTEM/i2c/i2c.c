@@ -23,7 +23,7 @@
 
 void I2C_GPIO_Init(void){ //I2C接口初始化
 	GPIO_InitTypeDef  GPIO_InitStructure; 	
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOC,ENABLE);       
+    // RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);       
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE); //启动I2C功能 
     GPIO_InitStructure.GPIO_Pin = I2C_SCL | I2C_SDA; //选择端口号                      
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD; //选择IO接口工作方式       
@@ -41,7 +41,7 @@ void I2C_Configuration(void){ //I2C初始化
 	I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit; //7位地址模式
 	I2C_InitStructure.I2C_ClockSpeed = BusSpeed; //总线速度设置 	
 	I2C_Init(I2C1,&I2C_InitStructure);
-	I2C_Cmd(I2C1,ENABLE);//开启I2C					
+	I2C_Cmd(I2C1,ENABLE);//开启I2C
 }
 
 void I2C_SAND_BUFFER(u8 SlaveAddr,u8 WriteAddr,u8* pBuffer,u16 NumByteToWrite){ //I2C发送数据串（器件地址，寄存器，内部地址，数量）

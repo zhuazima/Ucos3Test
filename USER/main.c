@@ -166,6 +166,7 @@ int main(void)
 	CPU_SR_ALLOC();
 	
 	delay_init();       //延时初始化
+	delay_ms(100);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断优先级分组
 	uart_init(115200);    //串口波特率设置
 	LED_Init();         //LED初始化
@@ -345,7 +346,7 @@ void start_task(void *p_arg)
 }
 
 /********************************************************************************
-							PWM 任务
+							OLED 任务
 ********************************************************************************/
 void oled_task(void *p_arg)
 {
@@ -465,10 +466,6 @@ void key_task(void *p_arg)
 	OS_ERR err;
 	err = err;
 	p_arg = p_arg;
-
-	// OS_TaskSuspend((OS_TCB  *)&Led0TaskTCB,&err);
-	// OS_TaskSuspend((OS_TCB  *)&Led1TaskTCB,&err);
-
 
 	while(1)
 	{
