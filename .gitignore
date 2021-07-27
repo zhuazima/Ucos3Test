@@ -7,6 +7,7 @@
 *.obj
 *.axf
 *.htm
+*.crf
 prj/Objects/*
 prj/Listings/*
 prj/Output/*
