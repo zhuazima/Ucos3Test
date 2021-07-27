@@ -353,17 +353,17 @@ void oled_task(void *p_arg)
 	u8 buffer[3];
 
 	OLED_DISPLAY_PIC1();//显示图片
-	delay_ms(5000); //延时
+	delay_ms(1000); //延时
 	OLED_DISPLAY_CLEAR();
 	OLED_DISPLAY_8x16_BUFFER(0,"   YoungTalk ");
 	OLED_DISPLAY_8x16_BUFFER(6,"  Temp:");
 
+	//显示汉字
 	OLED_DISPLAY_16x16(2,2*16,0);
 	OLED_DISPLAY_16x16(2,3*16,1);
 	OLED_DISPLAY_16x16(2,4*16,2);
 	OLED_DISPLAY_16x16(2,5*16,3);
-	OLED_DISPLAY_16x16(2,6*16,4);
-	OLED_DISPLAY_16x16(2,7*16,5);
+
 
 	while(1){
 		LM75A_GetTemp(buffer); //温度值

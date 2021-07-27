@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-07-26 09:43:46
+ * @LastEditTime: 2021-07-27 18:57:28
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \UCOS3_TEST\SYSTEM\i2c\i2c.h
+ */
 #ifndef __I2C_H
 #define __I2C_H	 
 #include "sys.h"
@@ -7,7 +15,7 @@
 #define I2C_SDA		GPIO_Pin_7	//定义IO接口
 
 #define HostAddress	0xc0	//总线主机的器件地址
-#define BusSpeed	200000	//总线速度（不高于400000）
+#define BusSpeed	300000	//总线速度（不高于400000）      太快的话IIC总线会堵塞
 
 
 void I2C_Configuration(void);

@@ -25,6 +25,8 @@
 #include "CHS_16x16.h" //引入汉字字体 
 #include "PIC1.h" //引入图片
 
+#include "delay.h"
+
 
 void OLED0561_Init (void){//OLED屏开显示初始化
 	OLED_DISPLAY_OFF(); //OLED关显示
@@ -123,14 +125,23 @@ void OLED_DISPLAY_16x16(u8 x, //显示汉字的页坐标（从0xB0到0xB7）
 }
 
 void OLED_DISPLAY_PIC1(void){ //显示全屏图片
-	u8 m,i;
-	for(m=0;m<8;m++){//
-		I2C_SAND_BYTE(OLED0561_ADD,COM,0xb0+m);
-		I2C_SAND_BYTE(OLED0561_ADD,COM,0x10); //起始列地址的高4位
-		I2C_SAND_BYTE(OLED0561_ADD,COM,0x02);	//起始列地址的低4位
-		for(i=0;i<128;i++){//送入128次图片显示内容
-			I2C_SAND_BYTE(OLED0561_ADD,DAT,PIC1[i+m*128]);}
+	u8 m,i,t;
+
+	for(t = 0;t < 150;t++)				//oled的驱动 sh1106 列坐标 0 ~ 131 
+	{
+		for(m=0;m<8;m++)
+		{
+			I2C_SAND_BYTE(OLED0561_ADD,COM,0xb0 + m);
+			I2C_SAND_BYTE(OLED0561_ADD,COM,0x10 + (t / 16)); 	//起始列地址的高4位	 	(t / 16)是取列的高四位
+			I2C_SAND_BYTE(OLED0561_ADD,COM,(t % 16));	//起始列地址的低4位		(t % 16)是取列的低四位
+
+			for(i=0;i<128;i++)							//送入128次图片显示内容
+			{
+				I2C_SAND_BYTE(OLED0561_ADD,DAT,PIC1[i+m*128]);
+			}
+		}
 	}
+
 }
  
 /*********************************************************************************************
