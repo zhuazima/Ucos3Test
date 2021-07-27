@@ -5,6 +5,8 @@
 *.o
 *.ko
 *.obj
+*.axf
+*.htm
 prj/Objects/*
 prj/Listings/*
 prj/Output/*
@@ -30,6 +32,7 @@ prj/ss80x.uvgui.*
 *.so
 *.so.*
 *.dylib
+
 
 # Executables
 *.exe
