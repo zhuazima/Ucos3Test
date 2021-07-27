@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>UCOS3_TEST</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -45,7 +45,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>..\OBJ\</OutputDirectory>
-          <OutputName>MALLOC</OutputName>
+          <OutputName>ucos3_test</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -357,7 +357,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\STM32F10x_FWLib\inc;..\FWLIB\STM32F10x_FWLib\inc;..\HARDWARE\LED;..\UCOSIII\uC-CPU;..\UCOSIII\uC-LIB;..\UCOSIII\uCOS-III;..\UCOSIII\UCOS_BSP;..\UCOSIII\uCOS_CONFIG;..\UCOSIII\uCOS-III\Source;..\UCOSIII\uC-CPU\ARM-Cortex-M3\RealView;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\HARDWARE\ADC;..\HARDWARE\DAC;..\HARDWARE\ITEMP;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\RTC;..\HARDWARE\TIMER;..\HARDWARE\WKUP</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\STM32F10x_FWLib\inc;..\FWLIB\STM32F10x_FWLib\inc;..\HARDWARE\LED;..\UCOSIII\uC-CPU;..\UCOSIII\uC-LIB;..\UCOSIII\uCOS-III;..\UCOSIII\UCOS_BSP;..\UCOSIII\uCOS_CONFIG;..\UCOSIII\uCOS-III\Source;..\UCOSIII\uC-CPU\ARM-Cortex-M3\RealView;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\HARDWARE\ADC;..\HARDWARE\DAC;..\HARDWARE\ITEMP;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\RTC;..\HARDWARE\TIMER;..\HARDWARE\WKUP;..\HARDWARE\OLED0561;..\SYSTEM\i2c;..\HARDWARE\LM75A</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -438,6 +438,16 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\TIMER\timer.c</FilePath>
             </File>
+            <File>
+              <FileName>oled0561.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\OLED0561\oled0561.c</FilePath>
+            </File>
+            <File>
+              <FileName>lm75a.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\LM75A\lm75a.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -457,6 +467,11 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\usart\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\i2c\i2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -507,6 +522,11 @@
               <FileName>stm32f10x_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FWLIB\STM32F10x_FWLib\src\stm32f10x_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FWLIB\STM32F10x_FWLib\src\stm32f10x_i2c.c</FilePath>
             </File>
           </Files>
         </Group>

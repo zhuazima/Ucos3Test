@@ -54,7 +54,7 @@ void start_task(void *p_arg);
 							OLED 任务的相关宏定义
 ********************************************************************************/
 //任务优先级
-#define	OLED_TASK_PRIO		5
+#define	OLED_TASK_PRIO		10
 //任务堆栈大小	
 #define OLED_STK_SIZE 		128
 //任务控制块
@@ -68,7 +68,7 @@ void oled_task(void *p_arg);
 							LED0 任务的相关宏定义
 ********************************************************************************/
 //任务优先级
-#define LED0_TASK_PRIO		6
+#define LED0_TASK_PRIO		4
 //任务堆栈大小	
 #define LED0_STK_SIZE 		128
 //任务控制块
@@ -172,9 +172,11 @@ int main(void)
 	KEY_Init();			//key init
 	Adc_Init();
 	TIM3_PWM_Init(2200,0); // 不分频 ,PWM 频率 =72000/900=80KHz
-		I2C_Configuration();//I2C初始化
-		OLED0561_Init(); //OLED0516初始化
-		OLED_DISPLAY_LIT(100);//亮度
+
+	//oled
+	I2C_Configuration();//I2C初始化
+	OLED0561_Init(); //OLED0516初始化
+	OLED_DISPLAY_LIT(100);//亮度
 
 
 
@@ -229,7 +231,7 @@ void start_task(void *p_arg)
 	
 	OS_CRITICAL_ENTER();	//进入临界区
 
-	//创建LED0任务
+	// //创建LED0任务
 	// OSTaskCreate((OS_TCB 	* )&Led0TaskTCB,		
 	// 			 (CPU_CHAR	* )"led0 task", 		
     //              (OS_TASK_PTR )led0_task, 			
@@ -244,20 +246,20 @@ void start_task(void *p_arg)
     //              (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR,
     //              (OS_ERR 	* )&err);				
 				 
-	//创建LED1任务
-	OSTaskCreate((OS_TCB 	* )&Led1TaskTCB,		
-				 (CPU_CHAR	* )"led1 task", 		
-                 (OS_TASK_PTR )led1_task, 			
-                 (void		* )0,					
-                 (OS_PRIO	  )LED1_TASK_PRIO,     	
-                 (CPU_STK   * )&LED1_TASK_STK[0],	
-                 (CPU_STK_SIZE)LED1_STK_SIZE/10,	
-                 (CPU_STK_SIZE)LED1_STK_SIZE,		
-                 (OS_MSG_QTY  )0,					
-                 (OS_TICK	  )0,					
-                 (void   	* )0,				
-                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
-                 (OS_ERR 	* )&err);	
+	// //创建LED1任务
+	// OSTaskCreate((OS_TCB 	* )&Led1TaskTCB,		
+	// 			 (CPU_CHAR	* )"led1 task", 		
+    //              (OS_TASK_PTR )led1_task, 			
+    //              (void		* )0,					
+    //              (OS_PRIO	  )LED1_TASK_PRIO,     	
+    //              (CPU_STK   * )&LED1_TASK_STK[0],	
+    //              (CPU_STK_SIZE)LED1_STK_SIZE/10,	
+    //              (CPU_STK_SIZE)LED1_STK_SIZE,		
+    //              (OS_MSG_QTY  )0,					
+    //              (OS_TICK	  )0,					
+    //              (void   	* )0,				
+    //              (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
+    //              (OS_ERR 	* )&err);	
 			 
 	//创建浮点测试任务
 	OSTaskCreate((OS_TCB 	* )&FloatTaskTCB,		
@@ -359,6 +361,8 @@ void oled_task(void *p_arg)
 	OLED_DISPLAY_16x16(2,3*16,1);
 	OLED_DISPLAY_16x16(2,4*16,2);
 	OLED_DISPLAY_16x16(2,5*16,3);
+	OLED_DISPLAY_16x16(2,6*16,4);
+	OLED_DISPLAY_16x16(2,7*16,5);
 
 	while(1){
 		LM75A_GetTemp(buffer); //温度值
