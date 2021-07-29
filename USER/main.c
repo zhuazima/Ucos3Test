@@ -168,16 +168,23 @@ int main(void)
 	delay_init();       //延时初始化
 	delay_ms(100);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断优先级分组
-	uart_init(115200);    //串口波特率设置
+	uart_init(115200);    //串口波特率设置 usart1
 	LED_Init();         //LED初始化
 	KEY_Init();			//key init
 	Adc_Init();
-	TIM3_PWM_Init(2200,0); // 不分频 ,PWM 频率 =72000/900=80KHz
+	TIM3_PWM_Init(2200,0); // 不分频 ,PWM 频率 =72000/900=80KHz 
+
+
+	// //mp3
+	// TOUCH_KEY_Init();//触摸按键初始化
+	// ENCODER_Init(); //旋转编码器初始化
+	// MY1690_Init(); //MP3芯片初始化
 
 	//oled
 	I2C_Configuration();//I2C初始化
 	OLED0561_Init(); //OLED0516初始化
 	OLED_DISPLAY_LIT(100);//亮度
+
 
 
 
