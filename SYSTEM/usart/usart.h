@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-21 22:10:32
- * @LastEditTime: 2021-07-28 21:53:01
+ * @LastEditTime: 2021-07-30 18:20:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \UCOS3_TEST\SYSTEM\usart\usart.h
@@ -42,17 +42,12 @@ extern u16 USART_RX_STA;         		//接收状态标记
 void uart_init(u32 bound);
 
 
-#define EN_USART3   1
-#define USART3_REC_LEN  			200  	//?¨??USART3×??ó????×?????
-#define EN_USART3 			1		//?????¨1??/?????¨0??????3	
-extern u8  USART3_RX_BUF[USART3_REC_LEN]; //????????,×??óUSART_REC_LEN??×???.??×?????????·?
-extern u16 USART3_RX_STA;         		//????×???±ê??	
-//?????ù?÷
-void USART3_Init(u32 bound);//????3????????????
-void USART3_printf(char* fmt,...); //????3??×¨??printf????
-
-
-
+#define EN_USART3   1                           //usart3 使能标记
+#define USART3_REC_LEN  			200  	    //定义uart3最大接收字节
+extern u8  USART3_RX_BUF[USART3_REC_LEN];       //接收缓冲
+extern u16 USART3_RX_STA;         		        //接收状态标记
+void USART3_Init(u32 bound);                    //usart3初始化
+void USART3_printf(char* fmt,...);              //usart3打印函数
 
 #endif
 

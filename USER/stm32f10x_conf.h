@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-29 22:35:45
- * @LastEditTime: 2021-07-26 09:47:20
+ * @LastEditTime: 2021-07-30 18:24:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \UCOSIII_Template\USER\stm32f10x_conf.h
@@ -38,7 +38,7 @@
 //#include "stm32f10x_can.h"
 //#include "stm32f10x_cec.h"
 //#include "stm32f10x_crc.h"
-#include "stm32f10x_dac.h"
+ #include "stm32f10x_dac.h"
 //#include "stm32f10x_dbgmcu.h"
 //#include "stm32f10x_dma.h"
 // #include "stm32f10x_exti.h"
