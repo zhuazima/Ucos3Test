@@ -357,7 +357,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\STM32F10x_FWLib\inc;..\FWLIB\STM32F10x_FWLib\inc;..\HARDWARE\LED;..\UCOSIII\uC-CPU;..\UCOSIII\uC-LIB;..\UCOSIII\uCOS-III;..\UCOSIII\UCOS_BSP;..\UCOSIII\uCOS_CONFIG;..\UCOSIII\uCOS-III\Source;..\UCOSIII\uC-CPU\ARM-Cortex-M3\RealView;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\HARDWARE\ADC;..\HARDWARE\DAC;..\HARDWARE\ITEMP;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\RTC;..\HARDWARE\TIMER;..\HARDWARE\WKUP;..\HARDWARE\OLED0561;..\SYSTEM\i2c;..\HARDWARE\LM75A</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\STM32F10x_FWLib\inc;..\FWLIB\STM32F10x_FWLib\inc;..\HARDWARE\LED;..\UCOSIII\uC-CPU;..\UCOSIII\uC-LIB;..\UCOSIII\uCOS-III;..\UCOSIII\UCOS_BSP;..\UCOSIII\uCOS_CONFIG;..\UCOSIII\uCOS-III\Source;..\UCOSIII\uC-CPU\ARM-Cortex-M3\RealView;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\HARDWARE\ADC;..\HARDWARE\DAC;..\HARDWARE\ITEMP;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\RTC;..\HARDWARE\TIMER;..\HARDWARE\WKUP;..\HARDWARE\OLED0561;..\SYSTEM\i2c;..\HARDWARE\LM75A;..\HARDWARE\ENCODER;..\HARDWARE\MY1690;..\HARDWARE\TOUCH_KEY</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -447,6 +447,21 @@
               <FileName>lm75a.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\LM75A\lm75a.c</FilePath>
+            </File>
+            <File>
+              <FileName>encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\ENCODER\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>MY1690.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\MY1690\MY1690.c</FilePath>
+            </File>
+            <File>
+              <FileName>touch_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\TOUCH_KEY\touch_key.c</FilePath>
             </File>
           </Files>
         </Group>

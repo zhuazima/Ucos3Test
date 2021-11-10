@@ -1,5 +1,11 @@
-
-
+/*
+ * @Author: your name
+ * @Date: 2021-07-30 18:26:31
+ * @LastEditTime: 2021-11-10 14:47:58
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \UCOS3_TEST\HARDWARE\TOUCH_KEY\touch_key.c
+ */
 /*
 //杜洋工作室出品
 //洋桃系列开发板应用程序
